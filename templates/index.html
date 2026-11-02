@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CustomerIQ — Customer Segmentation & Intelligence Platform</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Plotly.js for interactive charting -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-name">Customer<span>IQ</span></span>
+                        <span class="brand-tagline">Segmentation Engine</span>
+                    </div>
+                </div>
+                <button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Close Sidebar">&times;</button>
+            </div>
+
+            <!-- Customer Segmentation Navigation -->
+            <nav class="sidebar-nav" id="sidebarNavSegmentation">
+                <div class="nav-section-title">ANALYTICS & INSIGHTS</div>
+                <a href="#dashboard" class="nav-item active" data-tab="dashboard">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Overview Dashboard</span>
+                </a>
+                <a href="#visualizations" class="nav-item" data-tab="visualizations">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    <span>Interactive Charts</span>
+                </a>
+                <a href="#customers" class="nav-item" data-tab="customers">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Customer Explorer</span>
+                </a>
+                <a href="#playbook" class="nav-item" data-tab="playbook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                    <span>Segment Playbook</span>
+                </a>
+
+                <div class="nav-section-title">MODEL & DATA</div>
+                <a href="#tuning" class="nav-item" data-tab="tuning">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Model Tuning & Elbow</span>
+                </a>
+                <a href="#data-audit" class="nav-item" data-tab="data-audit">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span>Data Audit & Upload</span>
+                </a>
+                <a href="#exports" class="nav-item" data-tab="exports">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span>Reports & Exports</span>
+                </a>
+            </nav>
+
+            <!-- Clean Data Only Navigation -->
+            <nav class="sidebar-nav" id="sidebarNavCleanOnly" style="display: none;">
+                <div class="nav-section-title">CLEAN DATA WORKSPACE</div>
+                <a href="#clean-preview-section" class="nav-item active" data-scroll="clean-preview-section">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    <span>Raw Data & Diagnostics</span>
+                </a>
+                <a href="#clean-rules-section" class="nav-item" data-scroll="clean-rules-section">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Outlier & Filter Rules</span>
+                </a>
+                <a href="#clean-report-section" class="nav-item" data-scroll="clean-report-section">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                    <span>Cleaning Waterfall Audit</span>
+                </a>
+                <a href="#clean-table-section" class="nav-item" data-scroll="clean-table-section">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    <span>Cleaned Transactions Table</span>
+                </a>
+                <a href="#clean-download-section" class="nav-item" data-scroll="clean-download-section">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span>Download Clean Data</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <div class="status-indicator online"></div>
+                    <div class="status-info">
+                        <span class="status-title">ML Pipeline Active</span>
+                        <span class="status-sub" id="statusDatasetName">online_retail_sample.csv</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper">
+            <!-- Top Header Bar -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Sidebar">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+
+                    <!-- Platform Mode Switcher -->
+                    <div class="mode-switcher-container" id="modeSwitcher">
+                        <button class="mode-btn active" id="btnModeSegmentation" data-mode="segmentation" title="Run RFM analysis & K-Means customer segmentation">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+                            <span>Customer Segmentation</span>
+                        </button>
+                        <button class="mode-btn" id="btnModeCleanOnly" data-mode="clean-only" title="Pure transaction cleaning, diagnostics, and export without clustering">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span>Clean Data Only</span>
+                        </button>
+                    </div>
+
+                    <div class="dataset-badge" id="topbarDatasetBadge">
+                        <span class="badge-dot"></span>
+                        <span id="badgeFilename">Dataset: online_retail_sample.csv</span>
+                        <span class="badge-count" id="badgeCustomerCount">4,300 customers</span>
+                    </div>
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary btn-sm" id="btnLoadSample" title="Load built-in 106k retail transactions sample">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+                        <span>Load Sample Data</span>
+                    </button>
+                    <button class="btn btn-primary btn-sm" id="btnOpenUploadModal">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                        <span>Upload Dataset</span>
+                    </button>
+                    <!-- Theme Toggle -->
+                    <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle Dark / Light Theme" title="Toggle Dark/Light Mode">
+                        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Tab Container -->
+            <main class="content-container">
+
+                <!-- TAB 1: OVERVIEW DASHBOARD -->
+                <section class="tab-pane active" id="tab-dashboard">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-title">Executive Intelligence Dashboard</h1>
+                            <p class="view-subtitle">Customer behavioral RFM segmentation and revenue concentration analysis.</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="btn btn-outline btn-sm" id="btnQuickRecalculate">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+                                <span>Re-run Analysis</span>
+                            </button>
+                            <a href="/api/export/report" target="_blank" class="btn btn-secondary btn-sm">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                <span>Print Briefing</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- KPI Cards Grid -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon-box kpi-blue">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Total Customers</div>
+                                <div class="kpi-value" id="kpiTotalCustomers">--</div>
+                                <div class="kpi-meta">Cleaned unique buyer IDs</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon-box kpi-emerald">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Analyzed Revenue</div>
+                                <div class="kpi-value" id="kpiTotalRevenue">--</div>
+                                <div class="kpi-meta">Sum of cleaned customer spend</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon-box kpi-indigo">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Avg Recency</div>
+                                <div class="kpi-value" id="kpiAvgRecency">--</div>
+                                <div class="kpi-meta">Days since last transaction</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon-box kpi-purple">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Avg Spend / Customer</div>
+                                <div class="kpi-value" id="kpiAvgSpend">--</div>
+                                <div class="kpi-meta">Average lifetime value</div>
+                            </div>
+                        </div>
+
+                        <div class="kpi-card">
+                            <div class="kpi-icon-box kpi-amber">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </div>
+                            <div class="kpi-content">
+                                <div class="kpi-label">Cluster Separation</div>
+                                <div class="kpi-value" id="kpiSilhouette">--</div>
+                                <div class="kpi-meta" id="kpiSilhouetteLabel">Silhouette Score</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row: Share of Customers vs Share of Revenue -->
+                    <div class="dashboard-grid-2">
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Share of Customer Base</h3>
+                                    <p class="card-desc">% of customers in each behavioral group</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartCustomerShare" class="plotly-chart-container"></div>
+                            </div>
+                        </div>
+
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Share of Total Revenue</h3>
+                                    <p class="card-desc">Pareto revenue contribution across segments</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartRevenueShare" class="plotly-chart-container"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Segment Summary Table -->
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">Customer Segment Performance Matrix</h3>
+                                <p class="card-desc">Granular RFM metrics and economic breakdown per customer tier</p>
+                            </div>
+                            <button class="btn btn-outline btn-sm" id="btnExportSummaryCsv">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Export Summary CSV</span>
+                            </button>
+                        </div>
+                        <div class="card-body no-padding">
+                            <div class="table-responsive">
+                                <table class="data-table" id="tableSegmentSummary">
+                                    <thead>
+                                        <tr>
+                                            <th>Segment</th>
+                                            <th>Customer Count</th>
+                                            <th>% Customers</th>
+                                            <th>Avg Recency</th>
+                                            <th>Avg Frequency</th>
+                                            <th>Avg Spend</th>
+                                            <th>Total Spend</th>
+                                            <th>% Revenue</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodySegmentSummary">
+                                        <tr><td colspan="8" class="text-center py-4">Loading segment metrics...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 2: INTERACTIVE VISUALIZATIONS -->
+                <section class="tab-pane" id="tab-visualizations">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-title">Multi-Dimensional RFM Visualizations</h1>
+                            <p class="view-subtitle">Interactive 3D and 2D spatial clustering, distributions, and behavioral profiles.</p>
+                        </div>
+                    </div>
+
+                    <!-- 3D RFM Clustering View -->
+                    <div class="card chart-card mb-4">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">3D Customer Space: Recency &times; log10(Frequency) &times; log10(Monetary)</h3>
+                                <p class="card-desc">Rotate, zoom, and explore customer positions in the full 3-dimensional RFM vector space.</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart3DView" class="plotly-chart-container-large"></div>
+                        </div>
+                    </div>
+
+                    <!-- 2D Recency vs Monetary with Centroids -->
+                    <div class="card chart-card mb-4">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">Recency vs Total Spend (Log Scale) with Centroids</h3>
+                                <p class="card-desc">Individual customer distribution with cluster centers (centroids) highlighted by gold stars.</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart2DScatter" class="plotly-chart-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- Boxplots and Heatmap Profile -->
+                    <div class="dashboard-grid-2">
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">RFM Feature Distributions (Boxplots)</h3>
+                                    <p class="card-desc">Compare medians, quartiles, and spreads for Recency, Frequency, and Monetary.</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartBoxplots" class="plotly-chart-container"></div>
+                            </div>
+                        </div>
+
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Relative Behavioral Profile (Standardized Z-Score)</h3>
+                                    <p class="card-desc">Normalized RFM profile showing relative strengths (green = positive, red = lagging).</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartRadarProfile" class="plotly-chart-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 3: CUSTOMER EXPLORER -->
+                <section class="tab-pane" id="tab-customers">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-title">Customer Explorer & Individual Lookup</h1>
+                            <p class="view-subtitle">Search, filter by segment, sort by metrics, and inspect granular customer profiles.</p>
+                        </div>
+                        <div class="view-actions">
+                            <a href="/api/export/csv" class="btn btn-primary btn-sm">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download customer_segments.csv</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="card table-card">
+                        <!-- Table Filter Bar -->
+                        <div class="table-filter-bar">
+                            <div class="search-input-group">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                <input type="text" id="custSearchInput" placeholder="Search by Customer ID (e.g. 12347)...">
+                            </div>
+
+                            <div class="filter-controls">
+                                <div class="filter-group">
+                                    <label for="custSegmentFilter">Segment:</label>
+                                    <select id="custSegmentFilter" class="form-select">
+                                        <option value="all">All Segments</option>
+                                        <option value="VIP">VIP</option>
+                                        <option value="Regular">Regular</option>
+                                        <option value="Rare">Rare</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="custSortBy">Sort By:</label>
+                                    <select id="custSortBy" class="form-select">
+                                        <option value="Monetary">Monetary (Spend)</option>
+                                        <option value="Frequency">Frequency (Orders)</option>
+                                        <option value="Recency">Recency (Days)</option>
+                                        <option value="CustomerID">Customer ID</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="custSortDir">Order:</label>
+                                    <select id="custSortDir" class="form-select">
+                                        <option value="desc">Descending</option>
+                                        <option value="asc">Ascending</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="custPerPage">Show:</label>
+                                    <select id="custPerPage" class="form-select">
+                                        <option value="15">15 rows</option>
+                                        <option value="25">25 rows</option>
+                                        <option value="50">50 rows</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Customer Table -->
+                        <div class="card-body no-padding">
+                            <div class="table-responsive">
+                                <table class="data-table" id="tableCustomers">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer ID</th>
+                                            <th>Segment</th>
+                                            <th>Recency (Days)</th>
+                                            <th>Frequency (Orders)</th>
+                                            <th>Monetary (Total Spend)</th>
+                                            <th>Cluster ID</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyCustomers">
+                                        <tr><td colspan="7" class="text-center py-4">Loading customer records...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Table Pagination Bar -->
+                        <div class="table-pagination-bar">
+                            <div class="pagination-info" id="custPaginationInfo">
+                                Showing 0 to 0 of 0 customers
+                            </div>
+                            <div class="pagination-buttons">
+                                <button class="btn btn-outline btn-sm" id="btnPrevPage" disabled>&laquo; Previous</button>
+                                <span class="page-number-display" id="pageNumberDisplay">Page 1 of 1</span>
+                                <button class="btn btn-outline btn-sm" id="btnNextPage" disabled>Next &raquo;</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 4: SEGMENT PLAYBOOK -->
+                <section class="tab-pane" id="tab-playbook">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-title">Segment Strategic Action Playbook</h1>
+                            <p class="view-subtitle">Tailored marketing, retention, and lifecycle strategies based on RFM customer archetypes.</p>
+                        </div>
+                    </div>
+
+                    <div class="playbook-cards-grid" id="playbookGrid">
+                        <!-- Rendered dynamically by app.js based on segments -->
+                    </div>
+                </section>
+
+                <!-- TAB 5: MODEL EVALUATION & TUNING -->
+                <section class="tab-pane" id="tab-tuning">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-title">Machine Learning Model Evaluation & Hyperparameter Tuning</h1>
+                            <p class="view-subtitle">Evidence for cluster selection via the Elbow method (WCSS) and Silhouette analysis.</p>
+                        </div>
+                    </div>
+
+                    <!-- Evaluation Charts Grid -->
+                    <div class="dashboard-grid-2 mb-4">
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">The Elbow Method (WCSS / Inertia vs K)</h3>
+                                    <p class="card-desc">Identifies where adding more clusters yields diminishing reduction in within-cluster variance.</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartElbow" class="plotly-chart-container"></div>
+                            </div>
+                        </div>
+
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="card-title">Silhouette Score vs Number of Clusters (K)</h3>
+                                    <p class="card-desc">Measures cluster cohesion and separation quality (values closer to 1.0 indicate superior separation).</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartSilhouette" class="plotly-chart-container"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Hyperparameter Controls -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">Configurable Clustering & Outlier Parameters</h3>
+                                <p class="card-desc">Adjust thresholds to match your enterprise domain characteristics and re-run segmentation deterministically.</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form id="tuningForm" class="tuning-form-grid">
+                                <div class="form-group">
+                                    <label for="inputK">Cluster Count (k): <strong id="valK">3</strong></label>
+                                    <input type="range" id="inputK" min="2" max="10" value="3" step="1" class="form-range">
+                                    <small class="form-help">Default is 3 (VIP, Regular, Rare). Evaluated range: 2 to 10.</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputMaxQty">Outlier Max Quantity Limit</label>
+                                    <input type="number" id="inputMaxQty" value="300" min="10" max="100000" class="form-input">
+                                    <small class="form-help">Filters bulk B2B purchases or data entry anomalies (default: 300).</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputMaxPrice">Outlier Max Unit Price ($)</label>
+                                    <input type="number" id="inputMaxPrice" value="50" min="1" max="50000" step="0.5" class="form-input">
+                                    <small class="form-help">Filters extreme high unit price distortions (default: $50.00).</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputRandomState">Random State Seed</label>
+                                    <input type="number" id="inputRandomState" value="42" class="form-input">
+                                    <small class="form-help">Ensures 100% deterministic reproducibility across runs.</small>
+                                </div>
+
+                                <div class="form-group form-checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="checkRemoveCancellations" checked>
+                                        <span>Exclude Return/Cancellation Invoices (starting with 'C')</span>
+                                    </label>
+                                    <small class="form-help">Prevents negative spending distortions in customer monetary totals.</small>
+                                </div>
+
+                                <div class="form-actions-full">
+                                    <button type="submit" class="btn btn-primary" id="btnRunTuning">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                        <span>Run Pipeline & Update Models</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 6: DATA AUDIT & UPLOAD -->
+                <section class="tab-pane" id="tab-data-audit">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-title">Data Validation, Health & Cleaning Cascade</h1>
+                            <p class="view-subtitle">Audit trail of raw transactions, data cleaning steps, and schema verification.</p>
+                        </div>
+                    </div>
+
+                    <!-- Cleaning Cascade Waterfall Table -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">Data Cleaning Step-by-Step Audit Waterfall</h3>
+                                <p class="card-desc">Sequential record retention metrics showing exact reasons for excluded records.</p>
+                            </div>
+                        </div>
+                        <div class="card-body no-padding">
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Cleaning Filter Stage</th>
+                                            <th>Remaining Records</th>
+                                            <th>Records Excluded</th>
+                                            <th>Retention %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyCleaningAudit">
+                                        <tr><td colspan="4" class="text-center py-4">No cleaning audit available.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Raw Data Preview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">Raw Transaction Preview (Top 10 Records)</h3>
+                                <p class="card-desc">Underlying schema and sample records from the active dataset.</p>
+                            </div>
+                        </div>
+                        <div class="card-body no-padding">
+                            <div class="table-responsive">
+                                <table class="data-table" id="tableRawPreview">
+                                    <thead id="theadRawPreview"></thead>
+                                    <tbody id="tbodyRawPreview">
+                                        <tr><td class="text-center py-4">Loading preview...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 7: REPORTS & EXPORTS -->
+                <section class="tab-pane" id="tab-exports">
+                    <div class="view-header">
+                        <div>
+                            <h1 class="view-title">Enterprise Export & Intelligence Reports</h1>
+                            <p class="view-subtitle">Download analytical CSV datasets, segment summaries, and executive briefing reports.</p>
+                        </div>
+                    </div>
+
+                    <div class="export-cards-grid">
+                        <div class="card export-card">
+                            <div class="export-icon-box">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            </div>
+                            <h3>Customer Segments CSV</h3>
+                            <p>Complete customer-level file: <code>CustomerID, Recency, Frequency, Monetary, Cluster, Segment</code>. Sorted by segment tier and spend.</p>
+                            <a href="/api/export/csv" class="btn btn-primary btn-block">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download customer_segments.csv</span>
+                            </a>
+                        </div>
+
+                        <div class="card export-card">
+                            <div class="export-icon-box">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            </div>
+                            <h3>Segment Summary CSV</h3>
+                            <p>Aggregated metrics: customer volume, average recency, order frequency, average spend, total spend, % customer share, and % revenue share.</p>
+                            <button class="btn btn-secondary btn-block" id="btnExportSummaryCsv2">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download Segment Summary CSV</span>
+                            </button>
+                        </div>
+
+                        <div class="card export-card">
+                            <div class="export-icon-box">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                            </div>
+                            <h3>Executive Briefing (PDF/Print)</h3>
+                            <p>Formatted executive briefing document ready for board presentations, containing KPI summaries, segment tables, and marketing playbooks.</p>
+                            <a href="/api/export/report" target="_blank" class="btn btn-outline btn-block">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                                <span>Open Executive Briefing</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 8: CLEAN DATA ONLY WORKSPACE -->
+                <section class="tab-pane" id="tab-clean-only">
+                    <div class="view-header">
+                        <div>
+                            <div class="mode-indicator-pill">CLEAN DATA ONLY MODE</div>
+                            <h1 class="view-title">Transaction Data Cleansing & Validation Engine</h1>
+                            <p class="view-subtitle">Inspect raw anomalies, configure outlier limits, review step-by-step audit removals, and export pure cleaned records without clustering or RFM.</p>
+                        </div>
+                        <div class="view-actions">
+                            <button class="btn btn-primary btn-sm" id="btnRunCleanOnlyTop">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                <span>Clean Dataset Now</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Raw Data Diagnostics & Configurable Preview -->
+                    <div class="card mb-4" id="clean-preview-section">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">1. Raw Data Anomaly Diagnostics & Preview</h3>
+                                <p class="card-desc">Automatic schema verification and anomaly detection from the active file.</p>
+                            </div>
+                            <div class="filter-group">
+                                <label for="selectRawPreviewLimit">Preview Rows:</label>
+                                <select id="selectRawPreviewLimit" class="form-select form-select-sm">
+                                    <option value="5">5 rows</option>
+                                    <option value="10" selected>10 rows</option>
+                                    <option value="25">25 rows</option>
+                                    <option value="50">50 rows</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- Anomaly Diagnostic Summary Badges -->
+                            <div class="anomalies-grid mb-4" id="anomaliesGrid">
+                                <div class="anomaly-pill">
+                                    <span class="anomaly-label">Total Raw Records</span>
+                                    <strong class="anomaly-val" id="diagTotalRows">--</strong>
+                                </div>
+                                <div class="anomaly-pill anomaly-warning">
+                                    <span class="anomaly-label">Missing CustomerIDs</span>
+                                    <strong class="anomaly-val" id="diagMissingCust">--</strong>
+                                </div>
+                                <div class="anomaly-pill anomaly-warning">
+                                    <span class="anomaly-label">Cancellations ('C...')</span>
+                                    <strong class="anomaly-val" id="diagCancellations">--</strong>
+                                </div>
+                                <div class="anomaly-pill anomaly-warning">
+                                    <span class="anomaly-label">Duplicate Rows</span>
+                                    <strong class="anomaly-val" id="diagDuplicates">--</strong>
+                                </div>
+                                <div class="anomaly-pill anomaly-danger">
+                                    <span class="anomaly-label">Invalid Quantities (&le; 0)</span>
+                                    <strong class="anomaly-val" id="diagInvalidQty">--</strong>
+                                </div>
+                                <div class="anomaly-pill anomaly-danger">
+                                    <span class="anomaly-label">Invalid Prices (&le; 0)</span>
+                                    <strong class="anomaly-val" id="diagInvalidPrice">--</strong>
+                                </div>
+                            </div>
+
+                            <!-- Raw Preview Table -->
+                            <div class="table-responsive" style="max-height: 280px;">
+                                <table class="data-table" id="tableCleanRawPreview">
+                                    <thead id="theadCleanRawPreview">
+                                        <tr><th>Loading schema...</th></tr>
+                                    </thead>
+                                    <tbody id="tbodyCleanRawPreview">
+                                        <tr><td class="text-center py-4">Loading preview records...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outlier & Cleansing Rules Configuration -->
+                    <div class="card mb-4" id="clean-rules-section">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">2. Outlier Limits & Data Cleaning Rules</h3>
+                                <p class="card-desc">Configure outlier thresholds to filter bulk B2B purchases or high-value data entry distortions.</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form id="cleanOnlyRulesForm" class="tuning-form-grid">
+                                <div class="form-group">
+                                    <label for="inputCleanMaxQty">Outlier Max Quantity Limit</label>
+                                    <input type="number" id="inputCleanMaxQty" value="300" min="1" max="100000" class="form-input">
+                                    <small class="form-help">Transactions with quantity &gt; this threshold will be dropped (default: 300).</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputCleanMaxPrice">Outlier Max Unit Price ($)</label>
+                                    <input type="number" id="inputCleanMaxPrice" value="50" min="0.1" max="50000" step="0.5" class="form-input">
+                                    <small class="form-help">Transactions with unit price &gt; this threshold will be dropped (default: $50.00).</small>
+                                </div>
+
+                                <div class="form-group form-checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="checkCleanRemoveCancellations" checked>
+                                        <span>Exclude Return & Cancellation Invoices (InvoiceNo starting with 'C')</span>
+                                    </label>
+                                    <small class="form-help">Ensures returned items with negative quantities do not distort net transaction counts.</small>
+                                </div>
+
+                                <div class="form-group form-checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="checkCleanRemoveDuplicates" checked>
+                                        <span>Remove Exact Duplicate Rows</span>
+                                    </label>
+                                    <small class="form-help">Eliminates identical redundant rows logged due to network or sync duplicates.</small>
+                                </div>
+
+                                <div class="form-actions-full">
+                                    <button type="submit" class="btn btn-primary" id="btnExecuteCleanOnly">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                        <span>Clean Dataset Now</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Cleaning Report & Waterfall Audit -->
+                    <div class="card mb-4" id="clean-report-section">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">3. Data Cleaning Audit Report</h3>
+                                <p class="card-desc">Detailed accounting of original rows, cleaned rows, and specific reasons for removal.</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- KPI Summary Cards -->
+                            <div class="kpi-grid mb-4">
+                                <div class="kpi-card">
+                                    <div class="kpi-icon-box kpi-blue">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
+                                    </div>
+                                    <div class="kpi-content">
+                                        <div class="kpi-label">Original Rows</div>
+                                        <div class="kpi-value" id="cleanKpiOriginal">--</div>
+                                        <div class="kpi-meta">Raw input transactions</div>
+                                    </div>
+                                </div>
+
+                                <div class="kpi-card">
+                                    <div class="kpi-icon-box kpi-emerald">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <div class="kpi-content">
+                                        <div class="kpi-label">Cleaned Rows</div>
+                                        <div class="kpi-value" id="cleanKpiCleaned">--</div>
+                                        <div class="kpi-meta">Valid records retained</div>
+                                    </div>
+                                </div>
+
+                                <div class="kpi-card">
+                                    <div class="kpi-icon-box kpi-amber">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </div>
+                                    <div class="kpi-content">
+                                        <div class="kpi-label">Removed Rows</div>
+                                        <div class="kpi-value" id="cleanKpiDropped">--</div>
+                                        <div class="kpi-meta">Filtered anomalies</div>
+                                    </div>
+                                </div>
+
+                                <div class="kpi-card">
+                                    <div class="kpi-icon-box kpi-indigo">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                    </div>
+                                    <div class="kpi-content">
+                                        <div class="kpi-label">Retention Rate</div>
+                                        <div class="kpi-value" id="cleanKpiRetention">--</div>
+                                        <div class="kpi-meta">% of data preserved</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Waterfall Audit Table -->
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Cleaning Filter Stage</th>
+                                            <th>Remaining Records</th>
+                                            <th>Records Dropped</th>
+                                            <th>Reason for Removal</th>
+                                            <th>Retention %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyCleanOnlyAudit">
+                                        <tr><td colspan="5" class="text-center py-4">Click "Clean Dataset Now" to generate the audit report.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cleaned Dataset Explorer Table -->
+                    <div class="card mb-4" id="clean-table-section">
+                        <div class="card-header">
+                            <div>
+                                <h3 class="card-title">4. Cleaned Transaction Dataset Explorer</h3>
+                                <p class="card-desc">Interactive, searchable table of the actual verified records (with computed TotalAmount).</p>
+                            </div>
+                            <div class="view-actions">
+                                <a href="/api/clean-only/export/csv" class="btn btn-primary btn-sm" id="btnDownloadCleanCsvTop">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    <span>Download Cleaned CSV</span>
+                                </a>
+                                <a href="/api/clean-only/export/excel" class="btn btn-secondary btn-sm" id="btnDownloadCleanExcelTop">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line></svg>
+                                    <span>Download Cleaned Excel</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Filter & Search Bar -->
+                        <div class="table-filter-bar">
+                            <div class="search-input-group">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                <input type="text" id="searchCleanInput" placeholder="Search cleaned rows (InvoiceNo, CustomerID, Description)...">
+                            </div>
+
+                            <div class="filter-controls">
+                                <div class="filter-group">
+                                    <label for="sortCleanBy">Sort By:</label>
+                                    <select id="sortCleanBy" class="form-select">
+                                        <option value="InvoiceDate" selected>InvoiceDate</option>
+                                        <option value="TotalAmount">TotalAmount</option>
+                                        <option value="Quantity">Quantity</option>
+                                        <option value="UnitPrice">UnitPrice</option>
+                                        <option value="CustomerID">CustomerID</option>
+                                        <option value="InvoiceNo">InvoiceNo</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="sortCleanDir">Order:</label>
+                                    <select id="sortCleanDir" class="form-select">
+                                        <option value="desc" selected>Descending</option>
+                                        <option value="asc">Ascending</option>
+                                    </select>
+                                </div>
+
+                                <div class="filter-group">
+                                    <label for="perPageClean">Show:</label>
+                                    <select id="perPageClean" class="form-select">
+                                        <option value="15" selected>15 rows</option>
+                                        <option value="25">25 rows</option>
+                                        <option value="50">50 rows</option>
+                                        <option value="100">100 rows</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="card-body no-padding">
+                            <div class="table-responsive">
+                                <table class="data-table" id="tableCleanedOnly">
+                                    <thead id="theadCleanedOnly">
+                                        <tr>
+                                            <th>InvoiceNo</th>
+                                            <th>InvoiceDate</th>
+                                            <th>CustomerID</th>
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                            <th>UnitPrice</th>
+                                            <th>TotalAmount</th>
+                                            <th>Country</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbodyCleanedOnly">
+                                        <tr><td colspan="8" class="text-center py-4">Loading cleaned records...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Pagination Footer -->
+                        <div class="table-pagination-bar">
+                            <div class="pagination-info" id="cleanPaginationInfo">
+                                Showing 0 to 0 of 0 cleaned records
+                            </div>
+                            <div class="pagination-buttons">
+                                <button class="btn btn-outline btn-sm" id="btnCleanPrev" disabled>&laquo; Previous</button>
+                                <span class="page-number-display" id="cleanPageDisplay">Page 1 of 1</span>
+                                <button class="btn btn-outline btn-sm" id="btnCleanNext" disabled>Next &raquo;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clean Data Export Cards -->
+                    <div class="export-cards-grid" id="clean-download-section">
+                        <div class="card export-card">
+                            <div class="export-icon-box">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                            </div>
+                            <h3>Cleaned Transactions CSV</h3>
+                            <p>Export the cleaned transaction records in standard CSV format with computed <code>TotalAmount</code> and sanitized <code>CustomerID</code>.</p>
+                            <a href="/api/clean-only/export/csv" class="btn btn-primary btn-block">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download Cleaned CSV</span>
+                            </a>
+                        </div>
+
+                        <div class="card export-card">
+                            <div class="export-icon-box">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            </div>
+                            <h3>Cleaned Transactions Excel (.xlsx)</h3>
+                            <p>Export the verified dataset directly to Microsoft Excel spreadsheet format (<code>.xlsx</code>) for enterprise financial reporting or further processing.</p>
+                            <a href="/api/clean-only/export/excel" class="btn btn-secondary btn-block">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download Cleaned Excel (.xlsx)</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Upload Dataset Modal -->
+    <div class="modal-backdrop" id="uploadModal" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h3 class="modal-title">Upload Transaction Dataset</h3>
+                <button class="modal-close" id="btnCloseUploadModal" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Upload transaction records in CSV (<code>.csv</code>) or Excel (<code>.xlsx</code>, <code>.xls</code>) format. Must contain columns: <code>InvoiceNo</code>, <code>Quantity</code>, <code>InvoiceDate</code>, <code>UnitPrice</code>, <code>CustomerID</code>.</p>
+
+                <div class="drop-zone" id="dropZone">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    <p class="drop-zone-text">Drag & drop your file here, or <label for="fileInput" class="browse-link">browse</label></p>
+                    <p class="drop-zone-meta">Supports CSV, XLSX, XLS up to 50MB</p>
+                    <input type="file" id="fileInput" accept=".csv, .xlsx, .xls" style="display: none;">
+                </div>
+
+                <div id="uploadFileInfo" class="upload-file-info" style="display: none;">
+                    <div class="file-name" id="selectedFileName">filename.csv</div>
+                    <div class="file-size" id="selectedFileSize">0 KB</div>
+                </div>
+
+                <div id="uploadValidationBox" class="validation-box" style="display: none;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="btnCancelUpload">Cancel</button>
+                <button class="btn btn-primary" id="btnSubmitUpload" disabled>
+                    <span id="uploadBtnText">Upload & Process</span>
+                    <span class="spinner" id="uploadSpinner" style="display: none;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Detail Modal / Drawer -->
+    <div class="modal-backdrop" id="customerDetailModal" style="display: none;">
+        <div class="modal-dialog modal-dialog-lg">
+            <div class="modal-header">
+                <div>
+                    <h3 class="modal-title" id="custDetailTitle">Customer Profile</h3>
+                    <div class="modal-subtitle" id="custDetailSubtitle">Customer ID: --</div>
+                </div>
+                <button class="modal-close" id="btnCloseCustDetailModal" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="custDetailBody">
+                <!-- Injected via JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btnCloseCustDetailBtn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Application JavaScript -->
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

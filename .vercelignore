@@ -1,0 +1,10 @@
+__pycache__/
+.pytest_cache/
+tests/
+outputs/
+*.xlsx
+online_retail_demo*.csv
+data/uploaded_*
+segmentation.py
+generate_sample_data.py
+run.py
